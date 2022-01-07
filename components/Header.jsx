@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import {
   SearchIcon,
@@ -11,12 +12,16 @@ import {
 import { HomeIcon } from '@heroicons/react/solid';
 
 const Header = () => {
+  const router = useRouter();
   const { data: session } = useSession();
 
   return (
     <div className="sticky top-0 shadow-sm border-b bg-white z-10">
       <div className="flex justify-between bg-white max-w-6xl mx-5 xl:mx-auto">
-        <div className="relative hidden lg:inline-grid w-24 cursor-pointer">
+        <div
+          className="relative hidden lg:inline-grid w-24 cursor-pointer"
+          onClick={() => router.push('/')}
+        >
           <Image
             src="https://res.cloudinary.com/coffmanjrp-dev/image/upload/v1641425447/coffmanjrp.io/2880px_Instagram_logo_73fba851e4.png"
             alt="Next Instagram"
@@ -24,7 +29,10 @@ const Header = () => {
             objectFit="contain"
           />
         </div>
-        <div className="relative w-10 lg:hidden flex-shrink-0 cursor-pointer">
+        <div
+          className="relative w-10 lg:hidden flex-shrink-0 cursor-pointer"
+          onClick={() => router.push('/')}
+        >
           <Image
             src="https://res.cloudinary.com/coffmanjrp-dev/image/upload/v1641430063/coffmanjrp.io/insta_logo_d1a0094f69.png"
             alt="Next Instagram"
@@ -45,9 +53,8 @@ const Header = () => {
           </div>
         </div>
         <div className="flex justify-end items-center space-x-4">
-          <HomeIcon className="navBtn" />
+          <HomeIcon className="navBtn" onClick={() => router.push('/')} />
           <MenuIcon className="h-6 md:hidden cursor-pointer" />
-
           {session ? (
             <>
               <div className="relative navBtn">
@@ -61,7 +68,7 @@ const Header = () => {
               <HeartIcon className="navBtn" />
               <img
                 src={session.user?.image}
-                alt={session.user?.name}
+                alt={session?.user?.username}
                 className="w-10 h-10 rounded-full cursor-pointer border p-[2px]"
                 onClick={signOut}
               />
