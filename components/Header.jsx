@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import {
   SearchIcon,
   PlusCircleIcon,
@@ -10,6 +11,8 @@ import {
 import { HomeIcon } from '@heroicons/react/solid';
 
 const Header = () => {
+  const { data: session } = useSession();
+
   return (
     <div className="sticky top-0 shadow-sm border-b bg-white z-10">
       <div className="flex justify-between bg-white max-w-6xl mx-5 xl:mx-auto">
@@ -44,20 +47,30 @@ const Header = () => {
         <div className="flex justify-end items-center space-x-4">
           <HomeIcon className="navBtn" />
           <MenuIcon className="h-6 md:hidden cursor-pointer" />
-          <div className="relative navBtn">
-            <PaperAirplaneIcon className="navBtn" />
-            <div className="absolute -top-2 -right-1 text-xs w-4 h-4 bg-red-500 text-white rounded-full flex items-center justify-center animate-pulse">
-              3
-            </div>
-          </div>
-          <PlusCircleIcon className="navBtn" />
-          <UserGroupIcon className="navBtn" />
-          <HeartIcon className="navBtn" />
-          <img
-            src="https://res.cloudinary.com/coffmanjrp-dev/image/upload/v1635197000/coffmanjrp.io/paul_coffman_jr_e56ec322cd.png"
-            alt="profile"
-            className="h-10 rounded-full cursor-pointer"
-          />
+
+          {session ? (
+            <>
+              <div className="relative navBtn">
+                <PaperAirplaneIcon className="navBtn" />
+                <div className="absolute -top-2 -right-1 text-xs w-4 h-4 bg-red-500 text-white rounded-full flex items-center justify-center animate-pulse">
+                  3
+                </div>
+              </div>
+              <PlusCircleIcon className="navBtn" />
+              <UserGroupIcon className="navBtn" />
+              <HeartIcon className="navBtn" />
+              <img
+                src={session.user?.image}
+                alt={session.user?.name}
+                className="w-10 h-10 rounded-full cursor-pointer border p-[2px]"
+                onClick={signOut}
+              />
+            </>
+          ) : (
+            <button type="button" onClick={signIn}>
+              Sign In
+            </button>
+          )}
         </div>
       </div>
     </div>
