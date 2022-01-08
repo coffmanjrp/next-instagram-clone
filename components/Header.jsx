@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import {
   SearchIcon,
@@ -10,13 +11,15 @@ import {
   MenuIcon,
 } from '@heroicons/react/outline';
 import { HomeIcon } from '@heroicons/react/solid';
+import { modalState } from '@/atoms/modalAtom';
 
 const Header = () => {
   const router = useRouter();
+  const [open, setOpen] = useRecoilState(modalState);
   const { data: session } = useSession();
 
   return (
-    <div className="sticky top-0 shadow-sm border-b bg-white z-10">
+    <div className="sticky top-0 shadow-sm border-b bg-white z-20">
       <div className="flex justify-between bg-white max-w-6xl mx-5 xl:mx-auto">
         <div
           className="relative hidden lg:inline-grid w-24 cursor-pointer"
@@ -63,7 +66,10 @@ const Header = () => {
                   3
                 </div>
               </div>
-              <PlusCircleIcon className="navBtn" />
+              <PlusCircleIcon
+                className="navBtn"
+                onClick={() => setOpen(true)}
+              />
               <UserGroupIcon className="navBtn" />
               <HeartIcon className="navBtn" />
               <img
