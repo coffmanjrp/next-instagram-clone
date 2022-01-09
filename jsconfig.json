@@ -3,6 +3,7 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
+      "@/*": ["/*"],
       "@/atoms/*": ["atoms/*"],
       "@/components/*": ["components/*"],
       "@/styles/*": ["styles/*"]
