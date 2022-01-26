@@ -82,8 +82,6 @@ const Post = ({ id, username, img, userImg, caption }) => {
     }
   };
 
-  console.log(hasLiked);
-
   return (
     <div className="bg-white my-7 border rounded-sm">
       <div className="flex items-center p-5">

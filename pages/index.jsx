@@ -5,8 +5,9 @@ export default function Home() {
   return (
     <div className="bg-gray-50 h-screen overflow-y-scroll scrollbar-hide">
       <Head>
-        <title>Next Instagram</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="robots" content="noindex, nofollow" />
+        <title>Next Instagram</title>
       </Head>
 
       <Header />
