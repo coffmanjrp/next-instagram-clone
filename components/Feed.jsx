@@ -10,7 +10,7 @@ const Feed = () => {
         !session && '!grid-cols-1 !max-w-3xl'
       }`}
     >
-      <section className="col-span-2">
+      <section className={session && 'col-span-2'}>
         <Stories />
         <Posts />
       </section>
