@@ -11,7 +11,7 @@ A Instagram clone build with Next.js.
 1. Clone this repository.
 
 ```
-git clone git@github.com:coffmanjrp/next-bnb.git
+git clone git@github.com:coffmanjrp/next-instagram-clone.git
 ```
 
 Or download the zip file.
